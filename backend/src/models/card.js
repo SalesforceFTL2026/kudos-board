@@ -1,5 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const getPrismaClient = require("../config/database");
+const prisma = getPrismaClient();
 
 const Card = {
   // Find all cards by board ID

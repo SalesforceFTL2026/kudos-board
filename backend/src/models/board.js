@@ -1,11 +1,28 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const getPrismaClient = require("../config/database");
+const prisma = getPrismaClient();
 
 const Board = {
   // Find all boards with optional filters
   findAll: async (filters = {}) => {
-    // TODO: Feature 1 - Implement filtering logic
+    const { category, search } = filters;
+
+    const where = {};
+
+    // Filter by category (exact match)
+    if (category) {
+      where.category = category;
+    }
+
+    // Search in title (case-insensitive partial match)
+    if (search) {
+      where.title = {
+        contains: search,
+        mode: 'insensitive',
+      };
+    }
+
     return prisma.board.findMany({
+      where,
       include: {
         cards: true,
       },

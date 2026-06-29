@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const cardsController = require("../controllers/cards");
+const { validateCardCreate } = require("../middleware/validation");
 
 // GET /api/boards/:boardId/cards - List all cards for a board
 router.get("/boards/:boardId/cards", cardsController.getCardsByBoard);
 
 // POST /api/cards - Create a new card
-router.post("/", cardsController.createCard);
+router.post("/", validateCardCreate, cardsController.createCard);
 
 // PATCH /api/cards/:id/upvote - Upvote a card
 router.patch("/:id/upvote", cardsController.upvoteCard);

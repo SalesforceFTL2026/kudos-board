@@ -10,12 +10,16 @@ const cardsRouter = require("./routes/cards");
 // Middleware
 const errorHandler = require("./middleware/errorHandler");
 
+// Config
+const corsOptions = require("./config/cors");
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Health check
 app.get("/api/health", (_req, res) => {
