@@ -1,14 +1,32 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Board {
+  id        Int      @id @default(autoincrement())
+  title     String
+  category  String
+  author    String?
+  image     String?
+  createdAt DateTime @default(now())
+  cards     Card[]
+}
+
+model Card {
+  id        Int      @id @default(autoincrement())
+  message   String
+  gifUrl    String
+  upvotes   Int      @default(0)
+  author    String?
+  boardId   Int
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 }
