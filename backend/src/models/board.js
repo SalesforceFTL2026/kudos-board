@@ -1,5 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const getPrismaClient = require("../config/database");
+const prisma = getPrismaClient();
 
 const Board = {
   // Find all boards with optional filters
