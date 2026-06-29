@@ -1,0 +1,19 @@
+# Environment variables
+.env
+*.env
+
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Database files
+backend/prisma/*.db
+backend/prisma/*.db-journal
+
+# Build files
+frontend/dist/
+frontend/build/
+
+# OS files
+.DS_Store
