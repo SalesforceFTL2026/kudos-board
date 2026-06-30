@@ -1,49 +1,39 @@
 const Board = require("../models/board");
+const asyncHandler = require("../utils/asyncHandler");
 
 // GET /api/boards
-const getAllBoards = async (req, res, next) => {
-  try {
-    const { category, search } = req.query;
-    const boards = await Board.findAll({ category, search });
-    return res.json(boards);
-  } catch (error) {
-    next(error);
-  }
-};
+// Query params: category, search
+const getAllBoards = asyncHandler(async (req, res) => {
+  const { category, search } = req.query;
+  const boards = await Board.findAll({ category, search });
+  res.json(boards);
+});
 
 // POST /api/boards
-const createBoard = async (req, res, next) => {
-  try {
-    const { title, category, author, image } = req.body;
-    const board = await Board.create({ title, category, author, image });
-    return res.status(201).json(board);
-  } catch (error) {
-    next(error);
-  }
-};
+// Body: { title, category, author?, image? }
+const createBoard = asyncHandler(async (req, res) => {
+  const board = await Board.create(req.body);
+  res.status(201).json(board);
+});
 
 // GET /api/boards/:id
-const getBoard = async (req, res, next) => {
-  try {
-    const board = await Board.findById(req.params.id);
-    if (!board) {
-      return res.status(404).json({ error: "Board not found" });
-    }
-    return res.json(board);
-  } catch (error) {
-    next(error);
+const getBoard = asyncHandler(async (req, res) => {
+  const board = await Board.findById(req.params.id);
+  if (!board) {
+    return res.status(404).json({ error: "Board not found" });
   }
-};
+  res.json(board);
+});
 
 // DELETE /api/boards/:id
-const deleteBoard = async (req, res, next) => {
-  try {
-    await Board.delete(req.params.id);
-    return res.json({ message: "Board deleted successfully" });
-  } catch (error) {
-    next(error);
+const deleteBoard = asyncHandler(async (req, res) => {
+  const board = await Board.findById(req.params.id);
+  if (!board) {
+    return res.status(404).json({ error: "Board not found" });
   }
-};
+  await Board.delete(req.params.id);
+  res.json({ message: "Board deleted successfully" });
+});
 
 module.exports = {
   getAllBoards,
