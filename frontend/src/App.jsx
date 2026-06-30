@@ -1,5 +1,10 @@
 import React from 'react';
+import axios from "axios";
+import Home from "../HomePage/HomePage";
+import BoardPage from "../BoardCard/BoardCard";
 import './App.css';
+
+
 
 function App() {
   return (

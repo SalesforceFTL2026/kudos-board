@@ -1,57 +1,47 @@
 const Card = require("../models/card");
+const Board = require("../models/board");
+const asyncHandler = require("../utils/asyncHandler");
 
 // GET /api/boards/:boardId/cards
-const getCardsByBoard = async (req, res, next) => {
-  try {
-    // TODO: Feature 2 - Implement cards listing for a board
-    // const cards = await Card.findByBoardId(req.params.boardId);
-    // return res.json(cards);
-
-    res.status(501).json({ error: "Not implemented yet" });
-  } catch (error) {
-    next(error);
+const getCardsByBoard = asyncHandler(async (req, res) => {
+  const board = await Board.findById(req.params.boardId);
+  if (!board) {
+    return res.status(404).json({ error: "Board not found" });
   }
-};
+  const cards = await Card.findByBoardId(req.params.boardId);
+  res.json(cards);
+});
 
 // POST /api/cards
-const createCard = async (req, res, next) => {
-  try {
-    // TODO: Feature 2 - Implement card creation
-    // Body: { message, gifUrl, author?, boardId }
-    // const card = await Card.create(req.body);
-    // return res.status(201).json(card);
-
-    res.status(501).json({ error: "Not implemented yet" });
-  } catch (error) {
-    next(error);
+// Body: { message, gifUrl, author?, boardId }
+const createCard = asyncHandler(async (req, res) => {
+  const board = await Board.findById(req.body.boardId);
+  if (!board) {
+    return res.status(404).json({ error: "Board not found" });
   }
-};
+  const card = await Card.create(req.body);
+  res.status(201).json(card);
+});
 
 // PATCH /api/cards/:id/upvote
-const upvoteCard = async (req, res, next) => {
-  try {
-    // TODO: Feature 2 - Implement card upvote
-    // const card = await Card.upvote(req.params.id);
-    // return res.json(card);
-
-    res.status(501).json({ error: "Not implemented yet" });
-  } catch (error) {
-    next(error);
+const upvoteCard = asyncHandler(async (req, res) => {
+  const card = await Card.findById(req.params.id);
+  if (!card) {
+    return res.status(404).json({ error: "Card not found" });
   }
-};
+  const updated = await Card.upvote(req.params.id);
+  res.json(updated);
+});
 
 // DELETE /api/cards/:id
-const deleteCard = async (req, res, next) => {
-  try {
-    // TODO: Feature 2 - Implement card deletion
-    // await Card.delete(req.params.id);
-    // return res.json({ message: "Card deleted successfully" });
-
-    res.status(501).json({ error: "Not implemented yet" });
-  } catch (error) {
-    next(error);
+const deleteCard = asyncHandler(async (req, res) => {
+  const card = await Card.findById(req.params.id);
+  if (!card) {
+    return res.status(404).json({ error: "Card not found" });
   }
-};
+  await Card.delete(req.params.id);
+  res.json({ message: "Card deleted successfully" });
+});
 
 module.exports = {
   getCardsByBoard,

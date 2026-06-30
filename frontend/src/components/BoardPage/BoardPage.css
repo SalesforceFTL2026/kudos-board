@@ -1,0 +1,22 @@
+.board-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.board-page__back {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #555;
+  text-decoration: none;
+}
+
+.board-page__back:hover {
+  text-decoration: underline;
+}
+
+.board-page__status {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #555;
+}
