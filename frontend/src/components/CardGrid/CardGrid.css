@@ -1,0 +1,11 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.card-grid__empty {
+  text-align: center;
+  color: #777;
+  padding: 2rem 1rem;
+}

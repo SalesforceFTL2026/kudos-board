@@ -1,0 +1,60 @@
+.card-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.card-tile__message {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.card-tile__gif {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.card-tile__author {
+  margin: 0;
+  color: #777;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.card-tile__actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.card-tile__upvote,
+.card-tile__delete {
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.card-tile__upvote {
+  background: #eef;
+}
+
+.card-tile__upvote:hover {
+  background: #dde;
+}
+
+.card-tile__delete {
+  background: transparent;
+  color: #c0392b;
+}
+
+.card-tile__delete:hover {
+  text-decoration: underline;
+}

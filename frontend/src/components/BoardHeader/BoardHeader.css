@@ -1,0 +1,45 @@
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #eee;
+}
+
+.board-header__title {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.board-header__category {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: #eef;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.board-header__author {
+  margin: 0.5rem 0 0;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.board-header__add-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.board-header__add-btn:hover {
+  background: #4338ca;
+}
