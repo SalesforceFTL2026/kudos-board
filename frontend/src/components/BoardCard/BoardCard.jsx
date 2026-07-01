@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './BoardCard.css';
 
 function BoardCard({ board, onDelete }) {
   return (
-    <div className="board-card">
+    <Link to={`/board/${board.id}`} className="board-card">
       {board.image && (
         <img
           src={board.image}
@@ -21,6 +22,7 @@ function BoardCard({ board, onDelete }) {
       <button
         className="board-card-delete"
         onClick={(e) => {
+          e.preventDefault();
           e.stopPropagation();
           if (window.confirm(`Delete board "${board.title}"?`)) {
             onDelete(board.id);
@@ -30,7 +32,7 @@ function BoardCard({ board, onDelete }) {
       >
         ×
       </button>
-    </div>
+    </Link>
   );
 }
 
